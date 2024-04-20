@@ -18,7 +18,9 @@ function App() {
         body: JSON.stringify(formUser),
       });
       const data = await response.json();
-      console.log(data);
+      if (data.acknowledged) {
+        alert("User added successfully");
+      }
       form.reset();
     } catch (error) {
       console.log(error);
