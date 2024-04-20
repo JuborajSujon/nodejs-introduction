@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Users = () => {
   const loaderUsers = useLoaderData();
@@ -24,6 +24,7 @@ const Users = () => {
         {users.map((user, index) => (
           <p key={user._id}>
             {index + 1}. {user.name} : {user.email}
+            <Link to={`/user/${user._id}`}>Update</Link>
             <button onClick={() => handleDelete(user._id)}>Delete User</button>
           </p>
         ))}
