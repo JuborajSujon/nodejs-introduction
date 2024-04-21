@@ -5,6 +5,24 @@ const cors = require("cors");
 const app = express();
 const port = 3000;
 
+//Create product schema
+const productsSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  price: Number,
+  description: String,
+  category: String,
+  createAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+// Create product model
+const Product = mongoose.model("Products", productsSchema);
+
 // Connect to MongoDB
 // mongoose
 //   .connect("mongodb://127.0.0.1:27017/learn-mongodb")
