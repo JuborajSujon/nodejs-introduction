@@ -240,6 +240,29 @@ app.get("/products/:id", async (req, res) => {
   }
 });
 
+// delete product
+app.delete("/products/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const productData = await Product.deleteOne({ _id: id });
+    if (productData) {
+      res.status(200).send({
+        success: true,
+        message: "Product deleted successfully",
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "Data not found",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+});
+
 app.listen(port, async () => {
   console.log(`Example app listening at http://localhost:${port}`);
   await connectDB();
@@ -255,3 +278,13 @@ app.listen(port, async () => {
 // Put : /products/:id -> update specific product
 
 // Delete : /products/:id -> delete specific product
+
+// Count number of documents by query or get method
+//use ->productData.countDocuments()
+
+// Sort products by price
+// for assending order use -> productData.sort({price:1})
+// for desending order use -> productData.sort({price:-1})
+
+// selecting data
+// use -> productData.find().countDocuments().sort({price:-1}).select({title:1,price:1})
