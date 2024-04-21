@@ -117,9 +117,22 @@ app.post("/products", async (req, res) => {
 // Get all  products
 app.get("/products", async (req, res) => {
   try {
-    const productData = await Product.find();
+    // const productData = await Product.find();
     // make limit 2 products
     // const productData = await Product.find().limit(2);
+
+    // make specific data by query (comparison operator)
+    /* 
+    $eq -> equal, 
+    $gt -> greater than, 
+    $lt -> less than, 
+    $gte -> greater than or equal, 
+    $lte -> less than or equal, 
+    $ne -> not equal, 
+    $in -> in an array, 
+    $nin -> not in an array
+    */
+    const productData = await Product.find({ price: { $lt: 300 } });
     if (productData) {
       res.status(200).send({
         success: true,
