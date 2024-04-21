@@ -23,6 +23,10 @@ const productsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  rating: {
+    type: Number,
+    required: true,
+  },
   createAt: {
     type: Date,
     default: Date.now,
@@ -69,13 +73,14 @@ app.get("/", (req, res) => {
 app.post("/products", async (req, res) => {
   try {
     // get data from request body
-    const { title, price, description, category } = req.body;
+    const { title, price, description, category, rating } = req.body;
 
     const newProduct = new Product({
       title,
       price,
       description,
       category,
+      rating,
     });
     productData = await newProduct.save();
 
@@ -122,7 +127,7 @@ app.get("/products", async (req, res) => {
     // const productData = await Product.find().limit(2);
 
     // make specific data by query (comparison operator)
-    /* 
+    /*
     $eq -> equal, 
     $gt -> greater than, 
     $lt -> less than, 
@@ -132,7 +137,62 @@ app.get("/products", async (req, res) => {
     $in -> in an array, 
     $nin -> not in an array
     */
-    const productData = await Product.find({ price: { $lt: 300 } });
+    const price = req.query.price;
+    let productData;
+    if (price) {
+      productData = await Product.find({ price: { $gt: price } });
+    } else {
+      productData = await Product.find();
+    }
+
+    if (productData) {
+      res.status(200).send({
+        success: true,
+        data: productData,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "Data not found",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+});
+
+// Get all  products by logical operator
+app.get("/products_logic", async (req, res) => {
+  try {
+    // const productData = await Product.find();
+    // make limit 2 products
+    // const productData = await Product.find().limit(2);
+
+    // make specific data by query (logical operator)
+    /*
+    $and -> return only if all conditions are true
+    $or -> return only if any condition is true
+    $not -> return only if condition is false
+    $nor -> return only if all conditions are false
+
+    example : 
+    {$and:[
+      { price: { $gt: 100 } },
+      { ratin: { $lt: 5 } },]}
+    */
+    const price = req.query.price;
+    const rating = req.query.rating;
+    let productData;
+    if (price) {
+      productData = await Product.find({
+        $and: [{ price: { $gt: price } }, { rating: { $lt: rating } }],
+      });
+    } else {
+      productData = await Product.find();
+    }
+
     if (productData) {
       res.status(200).send({
         success: true,
