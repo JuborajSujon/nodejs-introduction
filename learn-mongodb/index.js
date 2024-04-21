@@ -65,44 +65,101 @@ app.get("/", (req, res) => {
   res.send("Wellcome to home page");
 });
 
+// Create product
 app.post("/products", async (req, res) => {
   try {
     // get data from request body
-    // const { title, price, description, category } = req.body;
+    const { title, price, description, category } = req.body;
 
-    // const newProduct = new Product({
-    //   title,
-    //   price,
-    //   description,
-    //   category,
-    // });
-    // productData = await newProduct.save();
+    const newProduct = new Product({
+      title,
+      price,
+      description,
+      category,
+    });
+    productData = await newProduct.save();
 
-    // res.status(201).send({ title, price, description, category });
+    res.status(201).send({
+      success: true,
+      data: productData,
+    });
     // create many products at once
-    // const products = req.body;
-    const productData = await Product.insertMany([
-      {
-        title: "Product 1",
-        price: 100,
-        description: "This is product 1",
-        category: "Electronics",
-      },
-      {
-        title: "Product 2",
-        price: 200,
-        description: "This is product 2",
-        category: "Electronics",
-      },
-      {
-        title: "Product 3",
-        price: 300,
-        description: "This is product 3",
-        category: "Electronics",
-      },
-    ]);
+    // const productData = await Product.insertMany([
+    //   {
+    //     title: "Product 1",
+    //     price: 100,
+    //     description: "This is product 1",
+    //     category: "Electronics",
+    //   },
+    //   {
+    //     title: "Product 2",
+    //     price: 200,
+    //     description: "This is product 2",
+    //     category: "Electronics",
+    //   },
+    //   {
+    //     title: "Product 3",
+    //     price: 300,
+    //     description: "This is product 3",
+    //     category: "Electronics",
+    //   },
+    // ]);
 
-    res.status(201).send(productData);
+    // res.status(201).send(productData);
+  } catch (err) {
+    res.status(500).send({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
+// Get all  products
+app.get("/products", async (req, res) => {
+  try {
+    const productData = await Product.find();
+    // make limit 2 products
+    // const productData = await Product.find().limit(2);
+    if (productData) {
+      res.status(200).send({
+        success: true,
+        data: productData,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "Data not found",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+});
+
+// Get single product
+app.get("/products/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const productData = await Product.findOne({ _id: id });
+
+    // make specific data by id
+    // const productData = await Product.findOne({ _id: id }).select({
+    //   title: 1,
+    //   price: 1,
+    // });
+    if (productData) {
+      res.status(200).send({
+        success: true,
+        data: productData,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "Data not found",
+      });
+    }
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -114,3 +171,14 @@ app.listen(port, async () => {
   console.log(`Example app listening at http://localhost:${port}`);
   await connectDB();
 });
+
+// DATABASE -> COLLECTION -> DOCUMENT
+
+// Get : /products -> return all the Products
+// Get : /products/:id -> return specific single product
+
+// Post : /products -> create new product
+
+// Put : /products/:id -> update specific product
+
+// Delete : /products/:id -> delete specific product
