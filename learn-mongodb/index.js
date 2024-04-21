@@ -244,11 +244,50 @@ app.get("/products/:id", async (req, res) => {
 app.delete("/products/:id", async (req, res) => {
   try {
     const id = req.params.id;
-    const productData = await Product.deleteOne({ _id: id });
+    // const productData = await Product.deleteOne({ _id: id });
+    const productData = await Product.findByIdAndDelete({ _id: id });
     if (productData) {
       res.status(200).send({
         success: true,
         message: "Product deleted successfully",
+        data: productData,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "Data not found",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+});
+
+// update product
+app.put("/products/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    // const productData = await Product.findByIdAndUpdate({ _id: id }, data, {
+    //   new: true,
+    // });
+    const productData = await Product.updateOne(
+      { _id: id },
+      {
+        $set: {
+          rating: req.body.rating,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+    if (productData) {
+      res.status(200).send({
+        success: true,
+        message: "Product updated successfully",
+        data: productData,
       });
     } else {
       res.status(404).send({
