@@ -4,7 +4,7 @@ const AddCoffee = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
+    const coffee_name = form.name.value;
     const quantity = form.quantity.value;
     const supplier = form.supplier.value;
     const taste = form.taste.value;
@@ -12,7 +12,7 @@ const AddCoffee = () => {
     const details = form.details.value;
     const photo = form.photo.value;
     const coffee = {
-      name,
+      coffee_name,
       quantity,
       supplier,
       taste,
