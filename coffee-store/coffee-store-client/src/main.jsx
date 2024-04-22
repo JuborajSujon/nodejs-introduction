@@ -5,6 +5,8 @@ import "./index.css";
 import Root from "./Root/Root";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Home from "./components/Home/Home";
+import AddCoffee from "./components/AddCoffee/AddCoffee";
+import UpdateCoffee from "./components/UpdateCoffee/UpdateCoffee";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,15 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/addCoffee",
+        element: <AddCoffee />,
+      },
+
+      {
+        path: "/updateCoffee",
+        element: <UpdateCoffee />,
       },
     ],
   },
