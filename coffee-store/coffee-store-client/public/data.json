@@ -1,0 +1,56 @@
+[
+  {
+    "coffee_name": "Colombian Supremo",
+    "quantity": 250,
+    "supplier": "XYZ Coffee Roasters",
+    "taste": "Rich and bold with fruity notes",
+    "category": "Single Origin",
+    "details": "This coffee is sourced from the mountains of Colombia and is known for its exceptional quality and flavor profile.",
+    "photo": "https://i.ibb.co/JtkhK3N/coffee1.png"
+  },
+  {
+    "coffee_name": "Ethiopian Yirgacheffe",
+    "quantity": 200,
+    "supplier": "ABC Coffee Company",
+    "taste": "Bright acidity with floral and citrusy flavors",
+    "category": "Single Origin",
+    "details": "This coffee hails from the Yirgacheffe region of Ethiopia, famous for its distinctively floral and complex coffees.",
+    "photo": "https://i.ibb.co/p3Kf6HL/coffee2.png"
+  },
+  {
+    "coffee_name": "House Blend",
+    "quantity": 500,
+    "supplier": "123 Coffee Roastery",
+    "taste": "Balanced with notes of chocolate and caramel",
+    "category": "Blend",
+    "details": "Our signature house blend is a carefully crafted combination of beans from various origins, resulting in a smooth and versatile coffee.",
+    "photo": "https://i.ibb.co/s3Snh7q/coffee3.png"
+  },
+  {
+    "coffee_name": "Kenyan AA",
+    "quantity": 150,
+    "supplier": "Coffee Direct",
+    "taste": "Bold and wine-like with fruity undertones",
+    "category": "Single Origin",
+    "details": "Kenyan AA is renowned for its bright acidity, full body, and complex flavor profile, making it a favorite among coffee enthusiasts.",
+    "photo": "https://i.ibb.co/py484VP/coffee4.png"
+  },
+  {
+    "coffee_name": "Guatemalan Antigua",
+    "quantity": 300,
+    "supplier": "Roast Masters",
+    "taste": "Medium-bodied with chocolatey notes",
+    "category": "Single Origin",
+    "details": "This coffee comes from the Antigua region of Guatemala, known for its volcanic soil, which contributes to the coffee's unique flavor profile.",
+    "photo": "https://i.ibb.co/j5rFRZw/coffee5.png"
+  },
+  {
+    "coffee_name": "French Roast",
+    "quantity": 400,
+    "supplier": "Dark Roast Co.",
+    "taste": "Intense and smoky with a bold finish",
+    "category": "Blend",
+    "details": "Our French Roast is dark and rich, perfect for those who prefer a strong and robust coffee experience.",
+    "photo": "https://i.ibb.co/r7832mN/coffee6.png"
+  }
+]
